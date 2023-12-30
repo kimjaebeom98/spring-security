@@ -2,6 +2,7 @@ package com.cos.security1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,6 +66,18 @@ public class IndexController {
 		userRepository.save(user); 
 		
 		return "redirect:/loginForm";
+	}
+	
+	@GetMapping("/info")
+	@Secured("ROLE_ADMIN")
+	public @ResponseBody String info() {
+		return "개인정보";
+	}
+	
+	@GetMapping("/data")
+	@PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')") // 메서드가 시작되기 전에 체크, 메서드 종료된 이후에 체크면 PostAuthorize << 쓰는 일 별로 없음
+	public @ResponseBody String data() {
+		return "데이터정보";
 	}
 
 }

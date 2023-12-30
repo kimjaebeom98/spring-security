@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터체인에 등록이 된다.
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) // Secured 어노테이션 활성화, preAuthorisze 어노테이션 활성화 << 왜 쓰냐면 메소드 하나만 권한 체크 걸고 싶을 때 주로 씀
 public class SecurityConfig {
 	
 	// 해당 메서드의 리턴되는 오브젝트를 loC로 등록
