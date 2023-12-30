@@ -28,7 +28,7 @@ public class PrincipalDetailsService implements UserDetailsService{
 		
 		System.out.println("username : " + username);
 		User userEntity = userRepository.findByUsername(username); // Jpa Query method
-		
+		System.out.println("role : " + userEntity.getRole());
 		if(userEntity != null) {
 			return new PrincipalDetails(userEntity);
 		}
